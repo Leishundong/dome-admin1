@@ -3,9 +3,7 @@ import {getHistoryPage, setHistoryPage, removeHistoryPage} from 'common/js/auth'
 export const historyPageMixin = {
   data(){
     return {
-      param: {
-        namelike: '%%'
-      }
+      
     }
   },
   created(){
@@ -24,7 +22,7 @@ export const historyPageMixin = {
       }, {deep: true});
 
       let historyPage = this.getHistoryPage();
-      console.log('enhehe',historyPage);
+
       if (historyPage) {
         this.param.paginator.page = +historyPage; //分页组件的当前页数page同步
       }

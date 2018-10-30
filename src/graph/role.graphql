@@ -1,5 +1,10 @@
-query RoleList($paginator: paginator){
-  RoleList(paginator:$paginator){
+query RoleList($namelike:String!,$paginator: paginator){
+  RoleList(qfilter:{
+               combinator:AND
+               key:"name"
+               operator:LIKE
+               value:$namelike
+             },paginator:$paginator){
     totalPages
     totalElements
     content{

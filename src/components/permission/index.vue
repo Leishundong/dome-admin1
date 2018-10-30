@@ -35,7 +35,7 @@
         <field-input v-model="role.name" label="角色名" width="10"
                      :rules="r(true).all(R.require)" prop="name"></field-input>
         <div v-for="(item,index) in role.privilegeItems">
-          <el-checkbox v-model="item.chosen">{{item.privilege.name}}</el-checkbox>
+          <input type="checkbox" v-model="item.chosen" >{{item.privilege.name}}</input>
           <field-input v-model="item.constraintRule" width="6"></field-input>
         </div>
       </form-container>
@@ -64,10 +64,13 @@
       return {
         rules,
         dialogType: '',
-        role:{}
+        role:{},
+        param: {
+          namelike: '%%'
+        }
       }
     },
-    mixins: [formRulesMixin,historyPageMixin],
+    mixins: [formRulesMixin],
     apollo: {
       list() {//loadingKey
         //created的时候会执行一次，context代表的是vm对象，调试时可以查阅代码：vue-apollo.esm.js:  options = options.call(context)
@@ -83,9 +86,9 @@
       }
     },
     created(){
-      this.gqlQuery(api.PrivilegeList,{paginator:this.paginator},function (data) {
+      /*this.gqlQuery(api.PrivilegeList,{paginator:this.paginator},function (data) {
         this.permissionlist = data
-      },true)
+      },true)*/
     },
     methods: {
       /*dataList(data) {
@@ -99,21 +102,10 @@
       adminStatus(disabled) {
         return disabled ? '删除' : "正常";
       },
-      chose(index){
-        let checkItem = this.role.privilegeItems[index];
-        if(checkItem.chosen){
-          checkItem.chosen = false;
-          /*checkItem.id="";
-          checkItem.constraintRule=""*/
-        }else {
-          checkItem.chosen = true
-        }
-        this.role.privilegeItems[index] = checkItem;
-      },
       dialogShow(type, row) {
         let defuleRule = JSON.parse(JSON.stringify(ruleList.rules));
         if(type=='add'){
-          this.role = {};
+          this.role={}
         }else{
           defuleRule.forEach((item)=>{
             JSON.parse(JSON.stringify(row)).privilegeItems.forEach((check)=>{

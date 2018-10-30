@@ -187,8 +187,10 @@ export let formRulesMixin = {
     },
     routerBack() {
       this.$router.back();
-    }
-
-
+    },
+    //
+    changePage(page) {
+      this.param.paginator.page = page;
+    },
   },
 };
