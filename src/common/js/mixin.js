@@ -22,10 +22,10 @@ export const historyPageMixin = {
       this.$watch("param", function () {
         this.refetch();
       }, {deep: true});
-      
+
       let historyPage = this.getHistoryPage();
+      console.log('enhehe',historyPage);
       if (historyPage) {
-        console.log('historyPage',historyPage)
         this.param.paginator.page = +historyPage; //分页组件的当前页数page同步
       }
     },

@@ -41,12 +41,12 @@ let componentsList = {
 export default {
   install(Vue) {
     Vue.use(ElementUI);
-    Vue.mixin(formRulesMixin);
+  //  Vue.mixin(formRulesMixin);
     Object.keys(componentsList).map((name) => {
       Vue.component(name, componentsList[name]);
     });
   },
-  mixin:formRulesMixin,
+ // mixin:formRulesMixin,
   extend:extendRules,
   upload:_upload
 }

@@ -52,7 +52,7 @@ export const constantRouterMap = [
         path: 'store',
         name: 'store',
         component: _import('permission/role'),
-        meta: {title: '角色', icon: 'table'},
+        meta: {title: '账号', icon: 'table'},
       },
     ]
   },

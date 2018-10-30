@@ -21,8 +21,59 @@ query findAdministList($namelike:String!,$paginator: paginator){
   }
 }
 
+query RoleList{
+  RoleList{
+    totalPages
+    totalElements
+    content{
+      id
+      name
+    }
+  }
+}
+
+mutation administUpdate($administ:Administ_!){
+  	administ_update(administ:$administ){
+    id
+  }
+}
+
+query PrivilegeList($paginator: paginator){
+  PrivilegeList(paginator:$paginator){
+    totalPages
+    totalElements
+    content{
+      id
+      name
+    }
+  }
+}
+
+
+query AdministList($paginator: paginator){
+  	AdministList(paginator:$paginator){
+    totalPages
+    totalElements
+    content{
+      username
+      password
+      createtime
+      number
+      disabled
+      id
+      roleItems{
+        role{
+          name
+          id
+        }
+      }
+    }
+  }
+}
+
+
 mutation addAdminist($administ: Administ_!){
-  mlshop_addadminist(administ: $administ){
+  administ_add(administ: $administ){
      id
   }
 }

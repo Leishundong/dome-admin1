@@ -1,0 +1,53 @@
+{
+  "rules":[
+    {
+      "id": null,
+      "constraintRule":null,
+      "privilege": {
+        "id": "CTys1tQ9E5S_u908mLYxS0A07",
+        "name": "用户管理",
+        "number": "1540342096367",
+        "privilege": "ADMIN_MANAGEMENT",
+        "category": 0
+      },
+      "chosen":false
+    },
+    {
+      "id": null,
+      "constraintRule":null,
+      "privilege": {
+        "id": "D4BXsHk8ECy5K1zLdYlZn1A07",
+        "name": "订单管理",
+        "number": "1540342096513",
+        "privilege": "ORDER_MANAGEMENT",
+        "category": 1
+      },
+      "chosen":false
+    },
+    {
+      "id": null,
+      "constraintRule":null,
+      "privilege": {
+        "id": "VKXG5V_6Gx_pWITrkpsjx3A07",
+        "name": "商品管理",
+        "number": "1540342096518",
+        "privilege": "PRODUCT_MANAGEMENT",
+        "category": 2
+      },
+      "chosen":false
+    },
+    {
+      "id": null,
+      "constraintRule":null,
+      "privilege": {
+        "id": "e6PIQl8kHOSgrO32oRnjo3A07",
+        "name": "角色管理",
+        "number": "1540342096509",
+        "privilege": "ROLE_MANAGEMENT",
+        "category": 0
+      },
+      "chosen":false
+    }
+  ]
+
+}

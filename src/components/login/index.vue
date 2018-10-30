@@ -67,7 +67,8 @@
             return false
           }
         })
-      }
+      },
+
     }
   }
 </script>
