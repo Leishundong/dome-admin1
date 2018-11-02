@@ -38,7 +38,7 @@ export let formRulesMixin = {
       R: __RULES__,
       //设置分页参数，和默认值
       partialPiginator: {totalPages: 10, totalElements: 10},//默认值
-      param: {paginator: {size: 5, page: 1}}//分页参数
+      param: {paginator: {size: 2, page: 1}}//分页参数
     }
   },
   computed: {
@@ -115,6 +115,7 @@ export let formRulesMixin = {
       var target = {
 //        loadingKey: 'loading',
         update: function (data) {
+          console.log(data);
           //深拷贝
           var deepclonedata = JSON.parse(JSON.stringify(data));
           var jqlname = Object.keys(deepclonedata)[0];
@@ -140,7 +141,7 @@ export let formRulesMixin = {
           return skipFunction ? skipFunction.call(this) : false;
         },
         deep: true,
-        fetchPolicy: 'network-only' //每次都从后台拉去数据
+        fetchPolicy: 'no-cache' //每次都从后台拉去数据
       };
 
       Object.assign(target, queryObject);//Object.assign方法用于对象的合并，将源对象（ source ）的所有可枚举属性，复制到目标对象（ target ）。

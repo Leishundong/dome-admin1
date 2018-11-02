@@ -14,7 +14,7 @@ import {tokenName} from 'api/config';
 import capture from './capture';
 
 const httpLink = new HttpLink({
-  uri: 'http://192.168.50.88:8080/graphql',
+  uri: 'http://115.159.154.194/mlshop/graphql',
 });
 
 
