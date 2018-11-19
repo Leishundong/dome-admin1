@@ -72,6 +72,20 @@
     },
     mixins: [formRulesMixin],
     apollo: {
+     /*tags: {
+        // GraphQL Query
+        query: api.RoleList,
+        // Reactive variables
+        variables() {
+          return {
+            namelike:this.param.namelike,
+            paginator:this.paginator
+          }
+        },
+        result(res){
+          console.log('aaa',res);
+        }
+      },*/
       list() {//loadingKey
         //created的时候会执行一次，context代表的是vm对象，调试时可以查阅代码：vue-apollo.esm.js:  options = options.call(context)
         return this.getEntityListWithPagintor(api.RoleList);
@@ -86,9 +100,6 @@
       }
     },
     created(){
-      /*this.gqlQuery(api.PrivilegeList,{paginator:this.paginator},function (data) {
-        this.permissionlist = data
-      },true)*/
     },
     methods: {
       /*dataList(data) {

@@ -68,7 +68,7 @@ const apolloProvider = new VueApollo({
     | 'no-cache'
     | 'standby';
        */
-fetchPolicy: 'no-cache',
+fetchPolicy: 'network-only',
     },
   },
 });

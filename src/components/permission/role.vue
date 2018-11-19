@@ -3,7 +3,7 @@
 
 
     <form-container :model="param" class="_search">
-      <field-input class="searchInput" label="搜索关键字" :wrapforlike="true" v-model="param.namelike"></field-input>
+      <field-input class="searchInput" label="搜索关键字" :wrapforlike="true" ></field-input>
       <el-button type="primary" style="margin-left: 15px">查询</el-button>
       <el-button type="primary" @click="dialogShow('add')">增加账号</el-button>
     </form-container>
@@ -45,7 +45,6 @@
             <template slot="prepend">{{item.name}}</template>
           </el-input>
         </el-form-item>-->
-
       </form-container>
     </field-dialog>
 

@@ -38,7 +38,10 @@ export let formRulesMixin = {
       R: __RULES__,
       //设置分页参数，和默认值
       partialPiginator: {totalPages: 10, totalElements: 10},//默认值
-      param: {paginator: {size: 2, page: 1}}//分页参数
+      param: {paginator: {size: 2, page: 1}},//分页参数,
+      copyNameLike:'',
+      historyPage:'',
+      newHistoryPag:''
     }
   },
   computed: {
@@ -48,6 +51,9 @@ export let formRulesMixin = {
         this.param.paginator
       );
     }
+  },
+  created(){
+    this._initPage();
   },
   methods: {
     r(required) {//规则组合器
@@ -85,7 +91,6 @@ export let formRulesMixin = {
           return this
         },
         all: function () {
-
           add.call(this, '', arguments);
           return this
         },
@@ -108,40 +113,51 @@ export let formRulesMixin = {
         variables: variables,
       });
     },
+
+    _initPage(){
+      //监听param变化，如果发生变化，响应式刷新
+      this.$watch("param", function () {
+        if(this.param.namelike!=this.copyNameLike){
+          this.param.paginator.page= 1;
+        }
+        this.refetch();
+      }, {deep: true});
+    },
+
+    refetch(){
+      if(this.$apollo.queries['list']) this.$apollo.queries['list'].refetch();//重新刷新apollo
+    },
     //便利方法，供在apollo:配置块中使用。设置好默认值，只要给一个query对象或者gql字符串即可
     //只限于list列表等需要分页的模块使用，且同一组件只能用一个
     getEntityListWithPagintor(queryObject, skipFunction) {
       queryObject = queryObject.query ? queryObject : {query: queryObject};
       var target = {
-//        loadingKey: 'loading',
+//      loadingKey: 'loading',
         update: function (data) {
-          console.log(data);
           //深拷贝
           var deepclonedata = JSON.parse(JSON.stringify(data));
           var jqlname = Object.keys(deepclonedata)[0];
           var result = deepclonedata[jqlname];
           //处理分页问题
+          this.copyNameLike = this.param.namelike;
           if (result && result.hasOwnProperty('totalPages')) {
-            console.log('totalPages',result,result.hasOwnProperty);
             this.partialPiginator.totalPages = result.totalPages;
           }
           if (result && result.hasOwnProperty('totalElements')) {
-            console.log('totalElements',result,result.hasOwnProperty);
             this.partialPiginator.totalElements = result.totalElements;
           }
           //判断是否存在返回的content，有则返回content
           return !result ? null : (result.hasOwnProperty('content') ? result.content : result);
         },//如果需要使用this来代表vm，则不能使用=>函数，因为箭头函数的this与所在闭包this相同
         variables() {
-          //响应示写法，一旦parm改变，将调用整个getEntityListWithPagintor方法，重新拉取数据
-          return this.param;
+          return this.param
         },
         skip() {
           //判断是否忽略查询
           return skipFunction ? skipFunction.call(this) : false;
         },
-        deep: true,
-        fetchPolicy: 'no-cache' //每次都从后台拉去数据
+        fetchPolicy: 'network-only',
+        deep: true
       };
 
       Object.assign(target, queryObject);//Object.assign方法用于对象的合并，将源对象（ source ）的所有可枚举属性，复制到目标对象（ target ）。

@@ -28,7 +28,6 @@
     },
     methods:{
       handleCurrentChangeInner(newPageIndex){
-        console.log('handleCurrentChangeInner',this.pageInfo);
         this.$emit("bosCurrentPageChanged",newPageIndex);
       }
     }
