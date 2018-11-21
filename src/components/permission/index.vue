@@ -50,7 +50,7 @@
   import {filterAttr} from 'common/js'
   import {rules} from 'common/js/validate';
   import api from 'graph/role.graphql';
-  import {historyPageMixin} from 'common/js/mixin';
+  import {historyPageMixin} from '../../common/js/mixin';
   import checkbox1 from '@/base/checkbox'
   import {formRulesMixin} from '../../field/common/mixinComponent'
   import ruleList from './ruleList'
@@ -65,27 +65,15 @@
         rules,
         dialogType: '',
         role:{},
+        rolelist:[],
         param: {
           namelike: '%%'
-        }
+        },
+        flag:false
       }
     },
     mixins: [formRulesMixin],
     apollo: {
-     /*tags: {
-        // GraphQL Query
-        query: api.RoleList,
-        // Reactive variables
-        variables() {
-          return {
-            namelike:this.param.namelike,
-            paginator:this.paginator
-          }
-        },
-        result(res){
-          console.log('aaa',res);
-        }
-      },*/
       list() {//loadingKey
         //created的时候会执行一次，context代表的是vm对象，调试时可以查阅代码：vue-apollo.esm.js:  options = options.call(context)
         return this.getEntityListWithPagintor(api.RoleList);
@@ -99,7 +87,8 @@
         return this.dialogType === 'add' ? '添加角色' : '修改角色';
       }
     },
-    created(){
+    mounted(){
+
     },
     methods: {
       /*dataList(data) {
